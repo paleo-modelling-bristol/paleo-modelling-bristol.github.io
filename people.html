@@ -145,7 +145,7 @@
 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
     return lines.slice(1).map(line => {
       const values = [];
       let current = '', inQuotes = false;
