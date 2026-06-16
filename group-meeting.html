@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Meetings — Bristol Paleo Modelling Group</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; font-size: 15px; line-height: 1.7; }
+
+    /* — Navigation — */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 2rem; border-bottom: 1px solid #e8e8e8;
+      background: #fff; position: sticky; top: 0; z-index: 10;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-box {
+      width: 38px; height: 38px; background: #993C1D; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 600; font-size: 12px; letter-spacing: .04em; flex-shrink: 0;
+    }
+    .nav-brand-text { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.2; }
+    .nav-brand-text span { display: block; font-size: 11px; color: #777; font-weight: 400; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 15px; color: #555; text-decoration: none; }
+    .nav-links a:hover { color: #993C1D; }
+    .nav-links a.active { color: #993C1D; font-weight: 600; }
+
+    /* — Page header — */
+    .page-header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid #e8e8e8; }
+    .breadcrumb { font-size: 12px; color: #999; margin-bottom: 0.5rem; }
+    .breadcrumb a { color: #999; text-decoration: none; }
+    .breadcrumb a:hover { color: #993C1D; }
+    .page-header h1 { font-size: 28px; font-weight: 600; }
+
+    /* — Filter bar — */
+    .filter-bar {
+      padding: 1.25rem 2rem; display: flex; align-items: center;
+      gap: 0.5rem; flex-wrap: wrap; border-bottom: 1px solid #e8e8e8;
+    }
+    .filter-btn {
+      padding: 0.3rem 0.9rem; font-size: 12px; border-radius: 20px;
+      border: 1px solid #e8e8e8; background: #fff; color: #555;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: #993C1D; color: #fff; border-color: #993C1D; }
+
+    /* — Seminar list — */
+    .seminar-wrap { padding: 2rem; max-width: 860px; }
+
+    .seminar-year { margin-bottom: 2.5rem; }
+    .year-title {
+      font-size: 13px; font-weight: 600; color: #993C1D;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid #f0e8e4;
+    }
+
+    .seminar-list { display: flex; flex-direction: column; }
+    .seminar-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: start;
+    }
+    .seminar-item:last-child { border-bottom: none; }
+
+    .seminar-date { font-size: 12px; color: #999; padding-top: 0.2rem; }
+    .seminar-date .day { font-size: 22px; font-weight: 600; color: #1a1a1a; line-height: 1; margin-bottom: 0.1rem; }
+    .seminar-date .month { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .seminar-body { }
+    .seminar-title { font-size: 14px; font-weight: 600; margin-bottom: 0.2rem; }
+    .seminar-speaker {
+      font-size: 13px; color: #555; margin-bottom: 0.35rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .seminar-speaker a { color: #993C1D; text-decoration: none; }
+    .seminar-speaker a:hover { text-decoration: underline; }
+    .seminar-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+    .tag {
+      font-size: 11px; padding: 0.15rem 0.55rem; border-radius: 20px;
+      border: 1px solid #e8e8e8; color: #666; background: #faf8f7;
+    }
+    .tag.upcoming { background: #fff8e6; border-color: #f5d78e; color: #8a6800; }
+    .tag.external { background: #eef4ff; border-color: #b3ccf5; color: #2a5aad; }
+    .seminar-abstract {
+      margin-top: 0.6rem; font-size: 13px; color: #555; line-height: 1.75;
+      display: none;
+    }
+    .seminar-abstract.open { display: block; }
+    .toggle-abstract {
+      font-size: 12px; color: #993C1D; cursor: pointer;
+      background: none; border: none; padding: 0;
+      margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 3px;
+    }
+    .toggle-abstract:hover { text-decoration: underline; }
+
+    /* — Footer — */
+    footer {
+      background: #faf8f7; padding: 1.5rem 2rem;
+      border-top: 1px solid #e8e8e8;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: #999;
+    }
+
+    /* — Responsive — */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .seminar-item { grid-template-columns: 70px 1fr; gap: 0 1rem; }
+      .seminar-date .day { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box">PMG</div>
+    <div class="nav-brand-text">
+      Bristol Paleo Modelling Group
+      <span>Fig Text University · Fig Text Department</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="model-outputs.html">Model Outputs</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="socials.html">Group Socials</a></li>
+    <li><a href="group-meeting.html" class="active">Group Meetings</a></li>
+    <li><a href="join.html">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Group Meetings</div>
+  <h1>Group Meetings</h1>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterSeminars('all', this)">All</button>
+  <button class="filter-btn" onclick="filterSeminars('internal', this)">Internal</button>
+  <button class="filter-btn" onclick="filterSeminars('external', this)">External Speaker</button>
+  <button class="filter-btn" onclick="filterSeminars('upcoming', this)">Upcoming</button>
+</div>
+
+<div class="seminar-wrap">
+
+  <!-- ————————————————————
+       HOW TO ADD A SEMINAR:
+       Copy a .seminar-item block.
+       - data-type: "internal" or "external"
+       - data-upcoming: "true" if upcoming, omit otherwise
+       - Fill in date, title, speaker, affiliation, tags, abstract
+  ———————————————————— -->
+
+  <div class="seminar-year" data-year="2025">
+    <div class="year-title">2025</div>
+    <div class="seminar-list">
+
+      <div class="seminar-item" data-type="internal" data-upcoming="true">
+        <div class="seminar-date">
+          <div class="day">20</div>
+          <div class="month">Jun 2025</div>
+        </div>
+        <div class="seminar-body">
+          <div class="seminar-title">Fig text fig text fig text seminar title</div>
+          <div class="seminar-speaker">
+            <i class="ti ti-user" style="font-size:13px;color:#bbb;"></i>
+            Fig Text Speaker · Fig Text University
+          </div>
+          <div class="seminar-meta">
+            <span class="tag upcoming">Upcoming</span>
+            <span class="tag">Internal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seminar-item" data-type="external">
+        <div class="seminar-date">
+          <div class="day">05</div>
+          <div class="month">May 2025</div>
+        </div>
+        <div class="seminar-body">
+          <div class="seminar-title">Fig text fig text fig text seminar title</div>
+          <div class="seminar-speaker">
+            <i class="ti ti-user" style="font-size:13px;color:#bbb;"></i>
+            <a href="#">Fig Text Speaker</a> · Fig Text Institution
+          </div>
+          <div class="seminar-meta">
+            <span class="tag external">External Speaker</span>
+          </div>
+          <button class="toggle-abstract" onclick="toggleAbstract(this)">
+            <i class="ti ti-chevron-down"></i> Abstract
+          </button>
+          <div class="seminar-abstract">
+            Fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text abstract of the talk.
+          </div>
+        </div>
+      </div>
+
+      <div class="seminar-item" data-type="internal">
+        <div class="seminar-date">
+          <div class="day">14</div>
+          <div class="month">Mar 2025</div>
+        </div>
+        <div class="seminar-body">
+          <div class="seminar-title">Fig text fig text fig text seminar title</div>
+          <div class="seminar-speaker">
+            <i class="ti ti-user" style="font-size:13px;color:#bbb;"></i>
+            Fig Text Speaker · Fig Text University
+          </div>
+          <div class="seminar-meta">
+            <span class="tag">Internal</span>
+          </div>
+          <button class="toggle-abstract" onclick="toggleAbstract(this)">
+            <i class="ti ti-chevron-down"></i> Abstract
+          </button>
+          <div class="seminar-abstract">
+            Fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text abstract of the talk.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="seminar-year" data-year="2024">
+    <div class="year-title">2024</div>
+    <div class="seminar-list">
+
+      <div class="seminar-item" data-type="external">
+        <div class="seminar-date">
+          <div class="day">10</div>
+          <div class="month">Nov 2024</div>
+        </div>
+        <div class="seminar-body">
+          <div class="seminar-title">Fig text fig text fig text seminar title</div>
+          <div class="seminar-speaker">
+            <i class="ti ti-user" style="font-size:13px;color:#bbb;"></i>
+            <a href="#">Fig Text Speaker</a> · Fig Text Institution
+          </div>
+          <div class="seminar-meta">
+            <span class="tag external">External Speaker</span>
+          </div>
+          <button class="toggle-abstract" onclick="toggleAbstract(this)">
+            <i class="ti ti-chevron-down"></i> Abstract
+          </button>
+          <div class="seminar-abstract">
+            Fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text abstract of the talk.
+          </div>
+        </div>
+      </div>
+
+      <div class="seminar-item" data-type="internal">
+        <div class="seminar-date">
+          <div class="day">22</div>
+          <div class="month">Aug 2024</div>
+        </div>
+        <div class="seminar-body">
+          <div class="seminar-title">Fig text fig text fig text seminar title</div>
+          <div class="seminar-speaker">
+            <i class="ti ti-user" style="font-size:13px;color:#bbb;"></i>
+            Fig Text Speaker · Fig Text University
+          </div>
+          <div class="seminar-meta">
+            <span class="tag">Internal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2025 Bristol Paleo Modelling Group</span>
+  <span>Fig Text University</span>
+</footer>
+
+<script>
+  function filterSeminars(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.seminar-item').forEach(item => {
+      if (type === 'all') {
+        item.style.display = '';
+      } else if (type === 'upcoming') {
+        item.style.display = item.dataset.upcoming === 'true' ? '' : 'none';
+      } else {
+        item.style.display = item.dataset.type === type ? '' : 'none';
+      }
+    });
+    // Hide year headers if all items inside are hidden
+    document.querySelectorAll('.seminar-year').forEach(section => {
+      const visible = Array.from(section.querySelectorAll('.seminar-item')).some(i => i.style.display !== 'none');
+      section.style.display = visible ? '' : 'none';
+    });
+  }
+
+  function toggleAbstract(btn) {
+    const abstract = btn.nextElementSibling;
+    const isOpen = abstract.classList.toggle('open');
+    btn.innerHTML = isOpen
+      ? '<i class="ti ti-chevron-up"></i> Abstract'
+      : '<i class="ti ti-chevron-down"></i> Abstract';
+  }
+</script>
+
+</body>
+</html>

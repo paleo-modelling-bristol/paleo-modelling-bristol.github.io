@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — Bristol Paleo Modelling Group</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; font-size: 15px; line-height: 1.7; }
+
+    /* — Navigation — */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 2rem; border-bottom: 1px solid #e8e8e8;
+      background: #fff; position: sticky; top: 0; z-index: 10;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-box {
+      width: 38px; height: 38px; background: #993C1D; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 600; font-size: 12px; letter-spacing: .04em; flex-shrink: 0;
+    }
+    .nav-brand-text { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.2; }
+    .nav-brand-text span { display: block; font-size: 11px; color: #777; font-weight: 400; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 15px; color: #555; text-decoration: none; }
+    .nav-links a:hover { color: #993C1D; }
+    .nav-links a.active { color: #993C1D; font-weight: 600; }
+
+    /* — Page header — */
+    .page-header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid #e8e8e8; }
+    .breadcrumb { font-size: 12px; color: #999; margin-bottom: 0.5rem; }
+    .breadcrumb a { color: #999; text-decoration: none; }
+    .breadcrumb a:hover { color: #993C1D; }
+    .page-header h1 { font-size: 28px; font-weight: 600; }
+
+    /* — Publications — */
+    .pub-wrap { padding: 2rem; max-width: 860px; }
+    .pub-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .filter-btn {
+      padding: 0.3rem 0.9rem; font-size: 12px; border-radius: 20px;
+      border: 1px solid #e8e8e8; background: #fff; color: #555;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: #993C1D; color: #fff; border-color: #993C1D; }
+
+    .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pub-item {
+      padding: 1.25rem 1.5rem; border: 1px solid #e8e8e8;
+      border-radius: 8px; background: #fff;
+    }
+    .pub-item:hover { border-color: #c07060; }
+    .pub-title { font-size: 14px; font-weight: 600; margin-bottom: 0.3rem; }
+    .pub-authors { font-size: 13px; color: #555; margin-bottom: 0.2rem; }
+    .pub-journal { font-size: 13px; color: #777; font-style: italic; margin-bottom: 0.6rem; }
+    .pub-meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .pub-year {
+      font-size: 11px; font-weight: 600; background: #faf8f7;
+      border: 1px solid #e8e8e8; border-radius: 4px;
+      padding: 0.1rem 0.5rem; color: #777;
+    }
+    .pub-link {
+      font-size: 12px; color: #993C1D; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 3px;
+    }
+    .pub-link:hover { text-decoration: underline; }
+
+    /* — Footer — */
+    footer {
+      background: #faf8f7; padding: 1.5rem 2rem;
+      border-top: 1px solid #e8e8e8;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: #999;
+    }
+
+    @media (max-width: 680px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box">PMG</div>
+    <div class="nav-brand-text">
+      Bristol Paleo Modelling Group
+      <span>Fig Text University · Fig Text Department</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="model-outputs.html">Model Outputs</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="socials.html">Group Socials</a></li>
+    <li><a href="group-meeting.html">Group Meetings</a></li>
+    <li><a href="join.html">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Publications</div>
+  <h1>Publications</h1>
+</div>
+
+<div class="pub-wrap">
+  <div class="pub-filters">
+    <button class="filter-btn active" onclick="filterPubs('all', this)">All</button>
+    <button class="filter-btn" onclick="filterPubs('2025', this)">2025</button>
+    <button class="filter-btn" onclick="filterPubs('2024', this)">2024</button>
+    <button class="filter-btn" onclick="filterPubs('2023', this)">2023</button>
+  </div>
+
+  <div class="pub-list">
+
+    <div class="pub-item" data-year="2025">
+      <div class="pub-title">Fig text fig text fig text fig text publication title</div>
+      <div class="pub-authors">Fig text, Fig text, Fig text (2025)</div>
+      <div class="pub-journal">Journal of Fig Text Research</div>
+      <div class="pub-meta">
+        <span class="pub-year">2025</span>
+        <a class="pub-link" href="#">DOI <i class="ti ti-external-link"></i></a>
+        <a class="pub-link" href="#">PDF <i class="ti ti-file-type-pdf"></i></a>
+      </div>
+    </div>
+
+    <div class="pub-item" data-year="2024">
+      <div class="pub-title">Fig text fig text fig text fig text publication title</div>
+      <div class="pub-authors">Fig text, Fig text (2024)</div>
+      <div class="pub-journal">Nature Fig Text</div>
+      <div class="pub-meta">
+        <span class="pub-year">2024</span>
+        <a class="pub-link" href="#">DOI <i class="ti ti-external-link"></i></a>
+      </div>
+    </div>
+
+    <div class="pub-item" data-year="2023">
+      <div class="pub-title">Fig text fig text fig text fig text publication title</div>
+      <div class="pub-authors">Fig text, Fig text, Fig text (2023)</div>
+      <div class="pub-journal">Science Fig Text</div>
+      <div class="pub-meta">
+        <span class="pub-year">2023</span>
+        <a class="pub-link" href="#">DOI <i class="ti ti-external-link"></i></a>
+        <a class="pub-link" href="#">PDF <i class="ti ti-file-type-pdf"></i></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 Bristol Paleo Modelling Group</span>
+  <span>Fig Text University</span>
+</footer>
+
+<script>
+  function filterPubs(year, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pub-item').forEach(item => {
+      item.style.display = (year === 'all' || item.dataset.year === year) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

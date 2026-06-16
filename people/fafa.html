@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fafa — Bristol Paleo Modelling Group</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; font-size: 15px; line-height: 1.7; }
+
+    /* — Navigation — */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 2rem; border-bottom: 1px solid #e8e8e8;
+      background: #fff; position: sticky; top: 0; z-index: 10;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-box {
+      width: 38px; height: 38px; background: #993C1D; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 600; font-size: 12px; letter-spacing: .04em; flex-shrink: 0;
+    }
+    .nav-brand-text { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.2; }
+    .nav-brand-text span { display: block; font-size: 11px; color: #777; font-weight: 400; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 15px; color: #555; text-decoration: none; }
+    .nav-links a:hover { color: #993C1D; }
+    .nav-links a.active { color: #993C1D; font-weight: 600; }
+
+    /* — Page header / breadcrumb — */
+    .page-header { padding: 2rem 2rem 0; }
+    .breadcrumb { font-size: 12px; color: #999; margin-bottom: 0; }
+    .breadcrumb a { color: #999; text-decoration: none; }
+    .breadcrumb a:hover { color: #993C1D; }
+
+    /* — Profile layout — */
+    .profile {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 3rem;
+      padding: 2rem 2rem 3rem;
+      max-width: 960px;
+    }
+
+    /* — Left column — */
+    .profile-photo {
+      width: 100%; aspect-ratio: 1 / 1;
+      border-radius: 10px; overflow: hidden;
+      background: #f5c4b3;
+    }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .profile-links { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .profile-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 13px; color: #555; text-decoration: none;
+    }
+    .profile-link:hover { color: #993C1D; }
+    .profile-link i { font-size: 16px; color: #993C1D; flex-shrink: 0; }
+
+    /* — Right column — */
+    .profile-name { font-size: 26px; font-weight: 600; margin-bottom: 0.2rem; }
+    .profile-title { font-size: 14px; color: #777; margin-bottom: 1.5rem; line-height: 1.5; }
+
+    .profile-section { margin-bottom: 2rem; }
+    .profile-section h2 {
+      font-size: 13px; font-weight: 600; color: #993C1D;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .profile-section p { font-size: 14px; color: #444; line-height: 1.85; }
+
+    /* — Research interests tags — */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: #faf8f7; border: 1px solid #e8e8e8;
+      border-radius: 20px; padding: 0.25rem 0.75rem;
+      font-size: 12px; color: #555;
+    }
+
+    /* — Publications list — */
+    .pub-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .pub-item { font-size: 13px; color: #444; line-height: 1.7; }
+    .pub-item .pub-title { font-weight: 600; color: #1a1a1a; }
+    .pub-item .pub-journal { color: #777; font-style: italic; }
+    .pub-item a { color: #993C1D; text-decoration: none; font-size: 12px; }
+    .pub-item a:hover { text-decoration: underline; }
+
+    /* — Footer — */
+    footer {
+      background: #faf8f7; padding: 1.5rem 2rem;
+      border-top: 1px solid #e8e8e8;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: #999;
+    }
+
+    /* — Responsive — */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .profile { grid-template-columns: 1fr; gap: 1.5rem; }
+      .profile-photo { max-width: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="../index.html">
+    <div class="nav-logo-box">PMG</div>
+    <div class="nav-brand-text">
+      Bristol Paleo Modelling Group
+      <span>Fig Text University · Fig Text Department</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+    <li><a href="../model-outputs.html">Model Outputs</a></li>
+    <li><a href="../people.html" class="active">People</a></li>
+    <li><a href="../socials.html">Group Socials</a></li>
+    <li><a href="../group-meeting.html">Group Meetings</a></li>
+    <li><a href="../join.html">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../people.html">People</a> / Fafa</div>
+</div>
+
+<div class="profile">
+
+  <!-- Left column -->
+  <div>
+    <div class="profile-photo">
+      <img src="../photos/fafa.png" alt="Fafa">
+    </div>
+    <div class="profile-links">
+      <a class="profile-link" href="#"><i class="ti ti-world"></i> Personal website</a>
+      <a class="profile-link" href="mailto:"><i class="ti ti-mail"></i> fafa@university.ac.uk</a>
+      <a class="profile-link" href="#"><i class="ti ti-brand-google-scholar"></i> Google Scholar</a>
+      <a class="profile-link" href="#"><i class="ti ti-brand-twitter"></i> Twitter / X</a>
+    </div>
+  </div>
+
+  <!-- Right column -->
+  <div>
+    <div class="profile-name">Fafa</div>
+    <div class="profile-title">
+      Professor · Fig Text University<br>
+      Fig Text Department
+    </div>
+
+    <div class="profile-section">
+      <h2>About</h2>
+      <p>Fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text.</p>
+      <p style="margin-top: 0.75rem;">Fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text fig text.</p>
+    </div>
+
+    <div class="profile-section">
+      <h2>Research Interests</h2>
+      <div class="tags">
+        <span class="tag">Fig text topic</span>
+        <span class="tag">Fig text topic</span>
+        <span class="tag">Fig text topic</span>
+        <span class="tag">Fig text topic</span>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Selected Publications</h2>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-title">Fig text fig text fig text fig text publication title</div>
+          <div>Fig text, Fig text, Fafa (2024)</div>
+          <div class="pub-journal">Journal of Fig Text Research</div>
+          <a href="#">DOI →</a>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Fig text fig text fig text fig text publication title</div>
+          <div>Fafa, Fig text (2023)</div>
+          <div class="pub-journal">Nature Fig Text</div>
+          <a href="#">DOI →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 Bristol Paleo Modelling Group</span>
+  <span>Fig Text University</span>
+</footer>
+
+</body>
+</html>

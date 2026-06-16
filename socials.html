@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Socials — Bristol Paleo Modelling Group</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; font-size: 15px; line-height: 1.7; }
+
+    /* — Navigation — */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 2rem; border-bottom: 1px solid #e8e8e8;
+      background: #fff; position: sticky; top: 0; z-index: 10;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-box {
+      width: 38px; height: 38px; background: #993C1D; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 600; font-size: 12px; letter-spacing: .04em; flex-shrink: 0;
+    }
+    .nav-brand-text { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.2; }
+    .nav-brand-text span { display: block; font-size: 11px; color: #777; font-weight: 400; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 15px; color: #555; text-decoration: none; }
+    .nav-links a:hover { color: #993C1D; }
+    .nav-links a.active { color: #993C1D; font-weight: 600; }
+
+    /* — Page header — */
+    .page-header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid #e8e8e8; }
+    .breadcrumb { font-size: 12px; color: #999; margin-bottom: 0.5rem; }
+    .breadcrumb a { color: #999; text-decoration: none; }
+    .breadcrumb a:hover { color: #993C1D; }
+    .page-header h1 { font-size: 28px; font-weight: 600; }
+
+    /* — Filter bar — */
+    .filter-bar {
+      padding: 1.25rem 2rem; display: flex; align-items: center;
+      gap: 0.5rem; flex-wrap: wrap; border-bottom: 1px solid #e8e8e8;
+    }
+    .filter-btn {
+      padding: 0.3rem 0.9rem; font-size: 12px; border-radius: 20px;
+      border: 1px solid #e8e8e8; background: #fff; color: #555;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: #993C1D; color: #fff; border-color: #993C1D; }
+
+    /* — Gallery — */
+    .gallery-wrap { padding: 2rem; }
+
+    .gallery-section { margin-bottom: 3rem; }
+    .gallery-section-title {
+      font-size: 15px; font-weight: 600; color: #1a1a1a;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .gallery-section-title .event-date { font-size: 12px; color: #999; font-weight: 400; }
+
+    /* Masonry grid */
+    .masonry {
+      columns: 4; column-gap: 0.75rem;
+    }
+    .masonry-item {
+      break-inside: avoid; margin-bottom: 0.75rem;
+      border-radius: 8px; overflow: hidden;
+      cursor: pointer; position: relative;
+    }
+    .masonry-item img {
+      width: 100%; display: block;
+      transition: transform 0.2s;
+    }
+    .masonry-item:hover img { transform: scale(1.03); }
+
+    /* Video item */
+    .masonry-item.video-item { position: relative; }
+    .video-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.2s;
+    }
+    .masonry-item.video-item:hover .video-overlay { background: rgba(0,0,0,0.35); }
+    .play-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: #993C1D;
+    }
+
+    /* Placeholder tiles (before real images are added) */
+    .masonry-placeholder {
+      break-inside: avoid; margin-bottom: 0.75rem;
+      border-radius: 8px; overflow: hidden;
+      background: #f5c4b3;
+      display: flex; align-items: center; justify-content: center;
+      color: #712B13; font-size: 12px;
+    }
+
+    /* — Lightbox — */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.88);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lightbox-inner img {
+      max-width: 90vw; max-height: 85vh;
+      border-radius: 6px; display: block;
+    }
+    .lightbox-inner video {
+      max-width: 90vw; max-height: 85vh;
+      border-radius: 6px; display: block;
+    }
+    .lightbox-close {
+      position: absolute; top: -36px; right: 0;
+      color: #fff; font-size: 22px; cursor: pointer;
+      background: none; border: none; line-height: 1;
+    }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      color: #fff; font-size: 28px; cursor: pointer;
+      background: none; border: none; padding: 0.5rem;
+      opacity: 0.7; transition: opacity 0.15s;
+    }
+    .lightbox-nav:hover { opacity: 1; }
+    .lightbox-nav.prev { left: -48px; }
+    .lightbox-nav.next { right: -48px; }
+    .lightbox-caption {
+      text-align: center; color: rgba(255,255,255,0.7);
+      font-size: 13px; margin-top: 0.75rem;
+    }
+
+    /* — Footer — */
+    footer {
+      background: #faf8f7; padding: 1.5rem 2rem;
+      border-top: 1px solid #e8e8e8;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: #999;
+    }
+
+    /* — Responsive — */
+    @media (max-width: 900px) { .masonry { columns: 3; } }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .masonry { columns: 2; }
+      .lightbox-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-box">PMG</div>
+    <div class="nav-brand-text">
+      Bristol Paleo Modelling Group
+      <span>Fig Text University · Fig Text Department</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="model-outputs.html">Model Outputs</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="socials.html" class="active">Group Socials</a></li>
+    <li><a href="group-meeting.html">Group Meetings</a></li>
+    <li><a href="join.html">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Group Socials</div>
+  <h1>Group Socials</h1>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+  <button class="filter-btn" onclick="filterGallery('fieldwork', this)">Fieldwork</button>
+  <button class="filter-btn" onclick="filterGallery('conference', this)">Conferences</button>
+  <button class="filter-btn" onclick="filterGallery('social', this)">Group Socials</button>
+</div>
+
+<div class="gallery-wrap">
+
+  <!-- ————————————————————
+       HOW TO ADD AN EVENT SECTION:
+       1. Copy a .gallery-section block below
+       2. Update the title and event-date
+       3. Add data-tag="fieldwork/conference/social" to the section
+       4. Replace placeholders with real .masonry-item blocks
+
+       HOW TO ADD A PHOTO:
+       <div class="masonry-item" data-src="photos/socials/your-photo.jpg" data-caption="Caption text">
+         <img src="photos/socials/your-photo.jpg" alt="Caption text">
+       </div>
+
+       HOW TO ADD A VIDEO:
+       <div class="masonry-item video-item" data-video="videos/your-video.mp4" data-caption="Caption text">
+         <img src="photos/socials/your-thumbnail.jpg" alt="Caption text">
+         <div class="video-overlay"><div class="play-btn"><i class="ti ti-player-play-filled"></i></div></div>
+       </div>
+  ———————————————————— -->
+
+  <div class="gallery-section" data-tag="social">
+    <div class="gallery-section-title">
+      Annual Group Dinner
+      <span class="event-date">Dec 2024</span>
+    </div>
+    <div class="masonry">
+      <div class="masonry-placeholder" style="height:180px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:240px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:160px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:200px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:220px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:170px;">[ video ]</div>
+    </div>
+  </div>
+
+  <div class="gallery-section" data-tag="conference">
+    <div class="gallery-section-title">
+      Fig Text Conference
+      <span class="event-date">Sep 2024</span>
+    </div>
+    <div class="masonry">
+      <div class="masonry-placeholder" style="height:200px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:160px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:230px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:180px;">[ photo ]</div>
+    </div>
+  </div>
+
+  <div class="gallery-section" data-tag="fieldwork">
+    <div class="gallery-section-title">
+      Field Trip — Fig Text Location
+      <span class="event-date">Jun 2024</span>
+    </div>
+    <div class="masonry">
+      <div class="masonry-placeholder" style="height:210px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:180px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:160px;">[ video ]</div>
+      <div class="masonry-placeholder" style="height:240px;">[ photo ]</div>
+      <div class="masonry-placeholder" style="height:190px;">[ photo ]</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner" id="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="ti ti-x"></i></button>
+    <button class="lightbox-nav prev" onclick="navigateLightbox(-1, event)"><i class="ti ti-chevron-left"></i></button>
+    <button class="lightbox-nav next" onclick="navigateLightbox(1, event)"><i class="ti ti-chevron-right"></i></button>
+    <div id="lightbox-media"></div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 Bristol Paleo Modelling Group</span>
+  <span>Fig Text University</span>
+</footer>
+
+<script>
+  // Filter gallery sections by tag
+  function filterGallery(tag, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-section').forEach(section => {
+      section.style.display = (tag === 'all' || section.dataset.tag === tag) ? '' : 'none';
+    });
+  }
+
+  // Lightbox
+  let items = [], currentIndex = 0;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.masonry-item').forEach((el, i) => {
+      el.addEventListener('click', () => openLightbox(i));
+    });
+    items = Array.from(document.querySelectorAll('.masonry-item'));
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function renderLightbox() {
+    const el = items[currentIndex];
+    const media = document.getElementById('lightbox-media');
+    const caption = el.dataset.caption || '';
+    document.getElementById('lightbox-caption').textContent = caption;
+
+    if (el.dataset.video) {
+      media.innerHTML = `<video src="${el.dataset.video}" controls autoplay style="max-width:90vw;max-height:85vh;border-radius:6px;display:block;"></video>`;
+    } else {
+      media.innerHTML = `<img src="${el.dataset.src}" alt="${caption}">`;
+    }
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-media').innerHTML = '';
+  }
+
+  function navigateLightbox(dir, e) {
+    e.stopPropagation();
+    currentIndex = (currentIndex + dir + items.length) % items.length;
+    renderLightbox();
+  }
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') navigateLightbox(1, { stopPropagation: () => {} });
+    if (e.key === 'ArrowLeft') navigateLightbox(-1, { stopPropagation: () => {} });
+  });
+</script>
+
+</body>
+</html>
