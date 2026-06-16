@@ -168,7 +168,7 @@
       ? `<img src="${photoUrl}" alt="${person.name}" onerror="this.parentElement.innerHTML='<i class=\\'ti ti-user placeholder-icon\\'></i>'">`
       : `<i class="ti ti-user placeholder-icon"></i>`;
 
-    const profilePage = `people/${person.name.toLowerCase().replace(/\s+/g, '-')}.html`;
+    const profilePage = `people/profile.html?name=${encodeURIComponent(person.name)}`;
 
     const links = [
       person.website ? `<a href="${person.website}" title="Website" onclick="event.stopPropagation()"><i class="ti ti-world"></i></a>` : '',
