@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* ---- Bristol Paleo Modelling Group theme (Tailwind v4) ----
+   Palette anchored on the BRIDGE indigo with a warm scholarly gold accent.
+   Neutrals are cool slate so the indigo reads as deliberate, not accidental.
+   Brand/accent foregrounds are tuned for WCAG AA (>=4.5:1 on paper). */
+@theme {
+  --color-paper: #ffffff;
+  --color-surface: #f5f6fb;
+  --color-surface-2: #e9ebf5;
+  --color-ink: #181a2b;
+  --color-muted: #555c72;
+  --color-border: #dfe2ef;
+
+  /* BRIDGE indigo */
+  --color-brand: #2e2875;
+  --color-brand-dark: #211c57;
+  --color-brand-light: #6b63c4;
+  --color-brand-soft: #eef0fb;
+  /* Scholarly gold accent (accessible on paper) */
+  --color-accent: #a16207;
+  --color-accent-dark: #854d0e;
+  --color-accent-light: #d9a441;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+
+  --radius-card: 0.875rem;
+}
+
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brand) 22%, transparent);
+}
+
+/* Consistent, visible focus ring for keyboard users across the site */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Lightweight markdown styling for editable copy / vacancy bodies */
+.markdown {
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+.markdown > * + * {
+  margin-top: 1rem;
+}
+.markdown h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+.markdown h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+.markdown a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.markdown ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+}
+.markdown ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+.markdown li + li {
+  margin-top: 0.35rem;
+}
+.markdown blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 1rem;
+  color: var(--color-muted);
+  font-style: italic;
+}

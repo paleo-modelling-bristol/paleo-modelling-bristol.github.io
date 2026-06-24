@@ -1,0 +1,38 @@
+# Group meetings.
+#
+# Add a new meeting by copying a block below. Newest/oldest is sorted
+# automatically: meetings dated today or later show under "Upcoming", earlier
+# ones under "Past speakers" (recomputed every time the site is built).
+#
+# Fields:
+#   date         required, YYYY-MM-DD
+#   speaker      required
+#   affiliation  optional
+#   title        optional (talk title); quote it if it contains a colon
+#   location     optional
+#   abstract     optional (longer description)
+#   external     optional, true (invited/external speaker) or false (internal)
+
+- date: 2026-07-01
+  speaker: Dr Helena Brandt
+  affiliation: University of Reading
+  title: Tipping points in past climate transitions
+  external: true
+
+- date: 2026-07-15
+  speaker: Saanvi Patel
+  affiliation: Bristol PMG
+  title: "Eocene temperature gradients: work in progress"
+  external: false
+
+- date: 2026-06-10
+  speaker: Prof. Daniel Owusu
+  affiliation: Imperial College London
+  title: Carbon cycle feedbacks across the PETM
+  external: true
+
+- date: 2026-05-20
+  speaker: Dr Tom Keller
+  affiliation: Bristol PMG
+  title: Ocean overturning in warm climates
+  external: false

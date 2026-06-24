@@ -1,0 +1,49 @@
+name: Optimize images to WebP
+
+# When someone uploads a JPG/PNG/TIFF under public/images (e.g. via the GitHub
+# web "Add file" button), convert it to compressed WebP and commit the result.
+# The deploy workflow then runs on that commit and publishes the site.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/images/**/*.jpg"
+      - "public/images/**/*.jpeg"
+      - "public/images/**/*.png"
+      - "public/images/**/*.tif"
+      - "public/images/**/*.tiff"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Convert images to WebP
+        run: npm run images:webp
+
+      - name: Commit converted images
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A public/images
+            git commit -m "chore: convert uploaded images to WebP"
+            git push
+          else
+            echo "Nothing to convert."
+          fi

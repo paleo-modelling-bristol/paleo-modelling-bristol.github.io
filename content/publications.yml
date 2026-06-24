@@ -1,0 +1,38 @@
+# Research outputs (publications).
+#
+# Shown on the Research Outputs page grouped by year, newest year first.
+# Within a year, entries appear in the order listed here.
+#
+# Fields:
+#   title     required; quote it if it contains a colon
+#   authors   required
+#   year      required (number)
+#   venue     optional (journal / conference)
+#   doi       optional (e.g. 10.5194/cp-2024-1 — rendered as a doi.org link)
+#   url       optional (used as the title link if there is no doi)
+#   featured  optional (true/false)
+
+- title: Mechanisms of polar amplification in a warm Eocene climate simulation
+  authors: Rivers, A., Keller, T., & Okafor, M.
+  venue: Climate of the Past
+  year: 2026
+  doi: 10.5194/cp-example-1
+  featured: true
+
+- title: Model–data comparison of sea surface temperatures across the Pliocene
+  authors: Okafor, M., Patel, S., & Rivers, A.
+  venue: Paleoceanography and Paleoclimatology
+  year: 2026
+  doi: 10.1029/example-2
+
+- title: Ice-sheet feedbacks on the glacial carbon cycle
+  authors: Bauer, L., & Rivers, A.
+  venue: Nature Geoscience
+  year: 2025
+  doi: 10.1038/example-3
+
+- title: "Monsoon dynamics in deep time: a multi-model intercomparison"
+  authors: Tanaka, Y., Keller, T., et al.
+  venue: Journal of Climate
+  year: 2024
+  doi: 10.1175/example-4
